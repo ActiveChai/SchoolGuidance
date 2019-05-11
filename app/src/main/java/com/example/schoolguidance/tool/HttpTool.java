@@ -38,7 +38,7 @@ public class HttpTool extends Thread {
      * @param url          发送http请求的url，包括ip后的router
      * @param message_what 使用Handler时，分辨消息的message.what
      */
-    HttpTool(int MODL, String url, int message_what, Handler handler) {
+    public HttpTool(int MODL, String url, int message_what, Handler handler) {
         current_mode = MODL;
         str_url = url;
         this.message_what = message_what;

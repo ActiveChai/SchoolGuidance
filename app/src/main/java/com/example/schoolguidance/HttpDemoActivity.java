@@ -1,4 +1,4 @@
-package com.example.school;
+package com.example.schoolguidance;
 
 import android.app.Activity;
 import android.content.Context;
@@ -51,7 +51,7 @@ public class HttpDemoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_http);
         test_GET = (Button) findViewById(R.id.test_GET);
         test_POST = (Button) findViewById(R.id.test_POST);
 
