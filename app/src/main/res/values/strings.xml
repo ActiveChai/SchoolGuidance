@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SchoolGuidance</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="stu_name">XXX</string>
+    <string name="stu_id">20162681xxx</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="messages">消息</string>
+</resources>
