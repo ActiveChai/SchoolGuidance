@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,22 +14,42 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.example.schoolguidance.R;
-import com.example.schoolguidance.stu.AskHelpActivity;
-import com.example.schoolguidance.stu.FeedbackActivity;
-import com.example.schoolguidance.stu.MapActivity;
 import com.example.schoolguidance.stu.MessagesActivity;
-import com.example.schoolguidance.stu.PunchCardsActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import cn.leancloud.chatkit.LCChatKitUser;
 
 public class VolunMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private ViewPager viewPager;
+    private TextView emptyText;
+    private ListView task_lisk_main;
+    static public List<Map<String, Object>> taskList = new ArrayList<Map<String, Object>>();
+    static public SimpleAdapter adapter = null;
+    static public List<LCChatKitUser> userList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.volunteer_main);
+        task_lisk_main = (ListView) findViewById(R.id.listView_volun_main);
+        emptyText = (TextView) findViewById(R.id.textView_empty);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        userList = CustomUserProvider.getInstance().getAllUsers();
+        adapter = new SimpleAdapter(this, taskList, R.layout.item_tasklist_volun_main,
+                new String[] {  },
+                new int[] { });
+        task_lisk_main.setAdapter(adapter);
+        task_lisk_main.setEmptyView(emptyText);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -48,6 +69,8 @@ public class VolunMainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
