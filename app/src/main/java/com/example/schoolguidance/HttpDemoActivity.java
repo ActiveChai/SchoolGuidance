@@ -1,21 +1,14 @@
 package com.example.schoolguidance;
 
-import android.app.Activity;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.schoolguidance.tool.HttpTool;
 
-import java.lang.ref.WeakReference;
 
 public class HttpDemoActivity extends AppCompatActivity {
 
@@ -73,10 +66,11 @@ public class HttpDemoActivity extends AppCompatActivity {
         test_GET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                httpTool = new HttpTool(HttpTool.MODE_GET, "http://129.211.28.150:8443/api/getRouteList", MESS_WHAT_TEST_GET, handler);
+                httpTool = new HttpTool(HttpTool.MODE_GET, "http://129.211.28.150:8443/api/getStopPosition", MESS_WHAT_TEST_GET, handler);
 
                 httpTool.clearData();
-//                httpTool.addData("","");如果有数据要传的话
+                httpTool.addData("lat","30.22");
+                httpTool.addData("lng","120.03");
 
                 httpTool.start();
             }
