@@ -17,6 +17,10 @@ public class StstSchedule extends AppCompatActivity {
 
     private BarChart mBarChart;
     private BarData mBarData;
+    private XAxis xAxis;
+    private YAxis leftxAxis;
+    private YAxis rightxAris;
+    //private YAxis yAxis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,8 @@ public class StstSchedule extends AppCompatActivity {
         // 2.0 ----x 轴数据
         // ArrayList<String> xValues = new ArrayList<>();
 
-        for (int x = 0; x < 10; x++) {
+        yValues.add(new BarEntry(0,0));
+        for (int x = 1; x < 10; x++) {
             // 2.0 ----xValues.add(String.valueOf(i));
             float y = (float) (Math.random() * 10);
             yValues.add(new BarEntry(x, y));
@@ -48,11 +53,25 @@ public class StstSchedule extends AppCompatActivity {
         // y 轴数据集
         BarDataSet barDataSet = new BarDataSet(yValues, "条形图");
 
+
         // 2.0 ---- mBarData = new BarData(xValues, barDataSet);
         mBarData = new BarData(barDataSet);
     }
 
     private void initBarChart() {
         mBarChart.setData(mBarData);
+        mBarChart.setDrawGridBackground(false);
+        mBarChart.animateX(1000);
+        mBarChart.animateY(1000);
+        xAxis=mBarChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setAxisMinimum(0f);
+        xAxis.setGranularity(1f);
+        leftxAxis=mBarChart.getAxisLeft();
+        rightxAris=mBarChart.getAxisRight();
+        leftxAxis.setAxisMinimum(0f);
+        rightxAris.setDrawAxisLine(false);
+        rightxAris.setEnabled(false);
+        xAxis.setDrawGridLines(false);
     }
 }
