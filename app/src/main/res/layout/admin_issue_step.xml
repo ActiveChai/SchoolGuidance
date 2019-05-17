@@ -3,12 +3,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".stu.MapActivity"
-    android:gravity="center">
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    >
+
+        <TextView
+            android:id="@+id/step1_text"
+            android:gravity="top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30px"
+            android:layout_marginBottom="30px"
+            android:text="请输入任务一"
+            android:textColor="#5D5858" />
+
+        <EditText
+            android:id="@+id/step1_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="30px"
+            android:hint="如：预报到"
+            android:background="@android:drawable/edit_text"
+            android:enabled="true"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:maxLines="3"
+            android:minLines="1"
+            android:scrollbars="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="65dp" />
 
     <TextView
+        android:id="@+id/step2_text"
+        android:gravity="top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发布流程"/>
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="30px"
+        android:text="请输入任务二"
+        android:textColor="#5D5858" />
+
+    <EditText
+        android:id="@+id/step2_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="30px"
+        android:hint="如：报到注册"
+        android:background="@android:drawable/edit_text"
+        android:enabled="true"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="1"
+        android:scrollbars="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="65dp" />
+
+    <TextView
+        android:id="@+id/step3_text"
+        android:gravity="top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="30px"
+        android:text="请输入任务三"
+        android:textColor="#5D5858" />
+
+    <EditText
+        android:id="@+id/step3_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="30px"
+        android:background="@android:drawable/edit_text"
+        android:hint="如：寝室报到"
+        android:enabled="true"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="1"
+        android:scrollbars="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="65dp" />
+
+    <TextView
+        android:id="@+id/step4_text"
+        android:gravity="top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:layout_marginBottom="30px"
+        android:text="请输入任务四"
+        android:textColor="#5D5858" />
+
+    <EditText
+        android:id="@+id/step4_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="30px"
+        android:background="@android:drawable/edit_text"
+        android:hint="如：领取教材"
+        android:enabled="true"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:minLines="1"
+        android:scrollbars="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="65dp" />
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_submit_step"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:padding="10dp"
+        android:text="提交"
+        app:qmui_radius="10dp" />
 </LinearLayout>
