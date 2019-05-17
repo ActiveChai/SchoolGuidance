@@ -2,15 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.schoolguidance">
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.RECORD_VIDEO" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.example.schoolguidance.volun.ChatKit"
         android:usesCleartextTraffic="true">
         <activity android:name=".stu.MessagesActivity"></activity>
         <activity android:name=".stu.AskHelpActivity" />
@@ -36,10 +26,10 @@
         <activity android:name=".admin.ManageStu"/>
         <activity android:name=".admin.AdminMainActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".admin.IssueInform"/>
-        <activity android:name=".admin.IssueStep" android:label="发布流程"/>
+        <activity android:name=".admin.IssueStep"/>
 
         <activity android:name=".volun.VolunteerFeedback"/>
-        <activity android:name=".volun.CurrentTask"  android:label="当前任务"/>
+        <activity android:name=".volun.CurrentTask"/>
         <activity android:name=".volun.HistoryTask"/>
         <activity android:name=".volun.VolunteerAccount"/>
         <activity android:name=".volun.VolunMainActivity" android:theme="@style/AppTheme.NoActionBar"/>
