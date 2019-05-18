@@ -1,5 +1,6 @@
 package com.example.schoolguidance.volun;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,8 +10,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -29,27 +34,25 @@ public class VolunMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private ViewPager viewPager;
     private TextView emptyText;
-    private ListView task_lisk_main;
+    private ListView task_list_main;
     static public List<Map<String, Object>> taskList = new ArrayList<Map<String, Object>>();
-    static public SimpleAdapter adapter = null;
-    static public List<LCChatKitUser> userList;
     private List<VolunteerService> volunteerServices=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.volunteer_main);
-        task_lisk_main = (ListView) findViewById(R.id.listView_volun_main);
+        task_list_main = (ListView) findViewById(R.id.service_listview);
         emptyText = (TextView) findViewById(R.id.textView_empty);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        userList = CustomUserProvider.getInstance().getAllUsers();
-        adapter = new SimpleAdapter(this, taskList, R.layout.volun_main_tasklist_item,
-                new String[] {  },
-                new int[] { });
-        task_lisk_main.setAdapter(adapter);
-        task_lisk_main.setEmptyView(emptyText);
+
         setSupportActionBar(toolbar);
+
+        initData();
+        MAdapter adapter=new MAdapter(VolunMainActivity.this,R.layout.volun_main_tasklist_item,volunteerServices);
+        task_list_main.setAdapter(adapter);
+        task_list_main.setEmptyView(emptyText);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -61,6 +64,15 @@ public class VolunMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+    }
+
+    void initData(){
+        VolunteerService volunteerService=new VolunteerService();
+        volunteerService.setServiceContent("提行李");
+        volunteerService.setStartTime("9:00");
+        for (int i=0;i<10;i++)
+            volunteerServices.add(volunteerService);
 
     }
 
@@ -130,5 +142,23 @@ public class VolunMainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    class MAdapter extends ArrayAdapter {
+        private final int resourceId;
+
+        public MAdapter(Context context, int textViewResourceId, List<VolunteerService> objects) {
+            super(context, textViewResourceId, objects);
+            resourceId = textViewResourceId;
+        }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            VolunteerService volunteerService= (VolunteerService) getItem(position); // 获取当前项的Fruit实例
+            View view = LayoutInflater.from(getContext()).inflate(resourceId, null);//实例化一个对象
+            TextView service_content = (TextView) view.findViewById(R.id.service_name);//获取该布局内的图片视图
+            TextView service_time = (TextView) view.findViewById(R.id.service_time);//获取该布局内的文本视图
+            service_content.setText(volunteerService.getServiceContent());//为图片视图设置图片资源
+            service_time.setText(volunteerService.getStartTime());//为文本视图设置文本内容
+            return view;
+        }
     }
 }
