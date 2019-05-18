@@ -3,7 +3,7 @@
       xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_conv_setting"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@android:drawable/checkbox_on_background"
         android:title="@string/lcim_conversation_detail"
         app:showAsAction="always"/>
 </menu>

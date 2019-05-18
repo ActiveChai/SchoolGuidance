@@ -63,7 +63,7 @@ import cn.leancloud.chatkit.utils.LCIMNotificationUtils;
 import cn.leancloud.chatkit.utils.LCIMPathUtils;
 import cn.leancloud.chatkit.view.LCIMInputBottomBar;
 import de.greenrobot.event.EventBus;
-
+import android.app.AlertDialog.Builder;
 /**
  * Created by wli on 15/8/27.
  * 将聊天相关的封装到此 Fragment 里边，只需要通过 setConversation 传入 Conversation 即可
@@ -180,14 +180,29 @@ public class LCIMConversationFragment extends Fragment {
   @Override
   public boolean onOptionsItemSelected (MenuItem item) {
     if (item.getItemId() == R.id.menu_conv_setting) {
-      Intent intent = new Intent(getActivity(), LCIMConversationDetailActivity.class);
-      intent.putExtra(LCIMConstants.CONVERSATION_ID, imConversation.getConversationId());
-      getActivity().startActivity(intent);
-      return true;
+      android.app.AlertDialog.Builder builder_done = createAlertDialog(android.R.drawable.checkbox_on_background, "确定当前志愿者服务完成了吗？");
+      builder_done.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          //修改志愿者活动状态为已完成和新生状态为可请求
+        }
+      });
+      builder_done.show();
+//      Intent intent = new Intent(getActivity(), LCIMConversationDetailActivity.class);
+//      intent.putExtra(LCIMConstants.CONVERSATION_ID, imConversation.getConversationId());
+//      getActivity().startActivity(intent);
+//      return true;
     }
     return super.onOptionsItemSelected(item);
   }
 
+  public Builder createAlertDialog(int icDialogAlert, String string) {
+    Builder builder = new Builder(this.getContext());
+    builder.setIcon(icDialogAlert);
+    builder.setTitle(string);
+    builder.setNegativeButton("取消", null);
+    return builder;
+  }
   public void setConversation(final AVIMConversation conversation) {
     imConversation = conversation;
     refreshLayout.setEnabled(true);

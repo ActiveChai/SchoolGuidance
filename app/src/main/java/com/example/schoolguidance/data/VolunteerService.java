@@ -1,7 +1,5 @@
 package com.example.schoolguidance.data;
 
-import java.awt.*;
-
 public class VolunteerService {
     private int activityNo;
     private int volunNo;

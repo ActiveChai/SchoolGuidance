@@ -29,9 +29,9 @@ public class StuTaskAdapter extends ArrayAdapter {
             TextView regist_place=(TextView)view.findViewById(R.id.task_place);
             TextView regist_ps=(TextView)view.findViewById(R.id.task_ps);
             regist_content.setText(registrationItem.getRegistItemContent());//为图片视图设置图片资源
-            regist_time.setText(registrationItem.getRegistItemStartTime());//为文本视图设置文本内容
+            regist_time.setText(registrationItem.getRegistItemTime());//为文本视图设置文本内容
             regist_place.setText(registrationItem.getRegistItemPlace());
-            regist_ps.setText(registrationItem.getRegistItemMaterials());
+            regist_ps.setText(registrationItem.getRegistItemps());
             return view;
         }
     }
