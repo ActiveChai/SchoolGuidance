@@ -25,6 +25,10 @@
             android:id="@+id/ststistics_schedule"
             android:icon="@drawable/ic_menu_gallery"
             android:title="统计进度" />
+        <item
+            android:id="@+id/manage_feedback"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="管理反馈"/>
 
     </group>
 

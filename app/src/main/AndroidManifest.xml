@@ -23,16 +23,17 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".admin.StstSchedule"/>
+        <activity android:name=".admin.StstSchedule" android:label="进度统计"/>
         <activity android:name=".admin.ManageVolun"/>
         <activity android:name=".admin.ManageStu"/>
         <activity android:name=".admin.AdminMainActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".admin.IssueInform"/>
+        <activity android:name=".admin.IssueInform" android:label="发布通知"/>
         <activity android:name=".admin.IssueStep" android:label="发布流程"/>
+        <activity android:name=".admin.ManageFeedback" android:label="管理反馈"/>
 
         <activity android:name=".volun.VolunteerFeedback"/>
         <activity android:name=".volun.CurrentTask"  android:label="当前任务"/>
-        <activity android:name=".volun.HistoryTask"/>
+        <activity android:name=".volun.HistoryTask" android:label="历史任务"/>
         <activity android:name=".volun.VolunteerAccount"/>
         <activity android:name=".volun.VolunMainActivity" android:theme="@style/AppTheme.NoActionBar"/>
 

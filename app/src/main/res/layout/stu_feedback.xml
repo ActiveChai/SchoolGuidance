@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.apple.school_information.AskHelpActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
 
         <TextView
@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30px"
             android:layout_marginBottom="30px"
-            android:text="请输入你想反馈的问题"
-            android:textColor="#5D5858" />
+            android:text="请输入你想反馈的问题:"
+            android:textColor="#5D5858"
+            android:layout_margin="10dp"/>
 
         <EditText
             android:id="@+id/content_feed"
@@ -34,7 +35,8 @@
             android:minLines="8"
             android:scrollbars="vertical"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="65dp" />
+            tools:layout_editor_absoluteY="65dp"
+            android:layout_margin="10dp"/>
 
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/btn_submit_feed"
@@ -46,7 +48,8 @@
             android:onClick="onClick"
             android:padding="10dp"
             android:text="提交"
-            app:qmui_radius="10dp" />
+            app:qmui_radius="10dp"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 
