@@ -10,10 +10,11 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/history_listview"
+        android:id="@+id/feedback_listview"
         android:divider="@null"
         android:dividerHeight="10dp"
-        android:padding="10dp">
+        android:padding="10dp"
+        >
 
     </ListView>
 </LinearLayout>

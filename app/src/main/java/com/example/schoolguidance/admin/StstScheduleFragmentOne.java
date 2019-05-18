@@ -86,7 +86,7 @@ public class StstScheduleFragmentOne extends Fragment {
         Legend legend=mBarChart.getLegend();
         legend.setTextSize(11f);
         Description xDescription = new Description();
-        xDescription.setText("完成任务数");
+        xDescription.setText("任务号");
         xDescription.setTextSize(12f);
         xDescription.setPosition(950,1480);
         mBarChart.setDescription(xDescription);

@@ -116,6 +116,10 @@ public class AdminMainActivity extends AppCompatActivity
             intent.setClass(AdminMainActivity.this, StstSchedule.class);
             startActivity(intent);
 
+        }else if(id==R.id.manage_feedback){
+            Intent intent=new Intent();
+            intent.setClass(AdminMainActivity.this,ManageFeedback.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
