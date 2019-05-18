@@ -2,54 +2,67 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    tools:context="com.example.schoolguidance.stu.AskHelpActivity">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+
+    <TextView
+        android:id="@+id/const_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        tools:ignore="MissingConstraints">
+        android:layout_marginTop="11dp"
+        android:text="请输入你的困难与想得到的帮助"
+        android:textColor="#5D5858"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/const_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30px"
-            android:layout_marginBottom="30px"
-            android:text="请输入你的困难与想得到的帮助"
-            android:textColor="#5D5858" />
+    <EditText
+        android:id="@+id/content_ask_help"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@android:drawable/edit_text"
+        android:enabled="true"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:maxLines="10"
+        android:minLines="8"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/const_text" />
 
-        <EditText
-            android:id="@+id/content_ask_help"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30px"
-            android:background="@android:drawable/edit_text"
-            android:enabled="true"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:maxLines="10"
-            android:minLines="8"
-            android:scrollbars="vertical"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="65dp" />
 
-        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
-            android:id="@+id/btn_submit_help"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:onClick="onClick"
-            android:padding="10dp"
-            android:text="提交"
-            app:qmui_radius="10dp" />
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_submit_help"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:padding="10dp"
+        android:text="提交"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btn_cancel_help"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel_help"
+        app:layout_constraintStart_toStartOf="parent"
+        app:qmui_radius="10dp" />
 
-    </LinearLayout>
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_cancel_help"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:padding="10dp"
+        android:text="取消"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_submit_help"
+        app:layout_constraintTop_toBottomOf="@+id/content_ask_help"
+        app:qmui_radius="10dp" />
 
 
 </android.support.constraint.ConstraintLayout>
