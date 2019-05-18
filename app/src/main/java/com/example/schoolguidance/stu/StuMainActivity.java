@@ -1,13 +1,8 @@
 package com.example.schoolguidance.stu;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,10 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.schoolguidance.R;
 import com.example.schoolguidance.data.RegistrationItem;
@@ -55,9 +47,9 @@ public class StuMainActivity extends AppCompatActivity
     void initData(){
         RegistrationItem registrationItem=new RegistrationItem();
         registrationItem.setRegistItemContent("领教材");
-        registrationItem.setRegistItemStartTime("9:00");
+        registrationItem.setRegistItemTime("9:00");
         registrationItem.setRegistItemPlace("西看台");
-        registrationItem.setRegistItemMaterials("带上校园卡");
+        registrationItem.setRegistItemps("带上校园卡");
         for (int i=0;i<10;i++)
             registrationItems.add(registrationItem);
 

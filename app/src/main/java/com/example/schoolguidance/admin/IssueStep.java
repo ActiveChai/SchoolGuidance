@@ -87,9 +87,9 @@ public class IssueStep extends AppCompatActivity{
                     else {
                         RegistrationItem registrationItem=new RegistrationItem();
                         registrationItem.setRegistItemContent(mDataName.get(i).getText());
-                        registrationItem.setRegistItemStartTime(mDataTime.get(i).getText());
+                        registrationItem.setRegistItemTime(mDataTime.get(i).getText());
                         registrationItem.setRegistItemPlace(mDataPlace.get(i).getText());
-                        registrationItem.setRegistItemMaterials(mDataPs.get(i).getText());
+                        registrationItem.setRegistItemps(mDataPs.get(i).getText());
                         stepList.add(registrationItem);
                     }
                 }
