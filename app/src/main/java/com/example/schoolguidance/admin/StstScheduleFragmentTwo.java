@@ -2,6 +2,8 @@ package com.example.schoolguidance.admin;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.schoolguidance.R;
+import com.example.schoolguidance.tool.HttpTool;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -29,8 +32,20 @@ import java.util.List;
 import static de.greenrobot.event.EventBus.TAG;
 
 public class StstScheduleFragmentTwo extends Fragment {
-    View view;
-    PieChart mPieChart;
+    private View view;
+    private PieChart mPieChart;
+    private HttpTool httpTool;
+    private static final int MESS_TOTAL_STU=500;
+    private static final int MESS_TOTAL_TASK = 501;
+    private static final int MESS_TASK_LIST = 502;
+    private static final int MESS_NUM=503;
+    private int total_stu;
+    private int total_task;
+    List<String> dataList=new ArrayList<>();
+    List<Float> datal=new ArrayList<>();
+    List<PieEntry> mPie = new ArrayList<>();
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,9 +68,6 @@ public class StstScheduleFragmentTwo extends Fragment {
     }
 
     private List<PieEntry> getPieChartData() {
-        List<String> dataList=new ArrayList<>();
-        List<Float> datal=new ArrayList<>();
-        List<PieEntry> mPie = new ArrayList<>();
 
         for (int i=0;i<7;i++ ) {
             dataList.add(String.valueOf(i*10));

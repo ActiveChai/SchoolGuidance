@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30px"
         android:layout_marginBottom="30px"
-        android:text="发布通知："
+        android:text="请输出您想发布的通知："
         android:textColor="#5D5858"
         android:layout_margin="10dp"/>
     <EditText
@@ -31,7 +31,7 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="65dp"
         android:layout_margin="10dp"
-        android:hint="请输出您想发布的通知"/>
+        />
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/btn_submit_inform"
         android:layout_width="fill_parent"

@@ -40,7 +40,7 @@ public class ManageFeedback extends AppCompatActivity {
 
     }
 }
-class MyAdapter extends ArrayAdapter {
+    class MyAdapter extends ArrayAdapter {
     private final int resourceId;
 
     public MyAdapter(Context context, int textViewResourceId, List<Feedback> objects) {
@@ -57,4 +57,4 @@ class MyAdapter extends ArrayAdapter {
         feedbackContent.setText(feedback.getFeedcontent());//为文本视图设置文本内容
         return view;
     }
-}
+    }

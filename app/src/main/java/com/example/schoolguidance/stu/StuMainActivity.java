@@ -1,10 +1,12 @@
 package com.example.schoolguidance.stu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,27 +16,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.schoolguidance.R;
+import com.example.schoolguidance.data.RegistrationItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StuMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    private List<RegistrationItem> registrationItems=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        initData();
+        StuTaskAdapter adapter=new StuTaskAdapter(StuMainActivity.this,R.layout.stu_task_item,registrationItems);
+        ListView listView=(ListView)findViewById(R.id.task_listview);
+        listView.setAdapter(adapter);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -47,7 +52,16 @@ public class StuMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+    void initData(){
+        RegistrationItem registrationItem=new RegistrationItem();
+        registrationItem.setRegistItemContent("领教材");
+        registrationItem.setRegistItemStartTime("9:00");
+        registrationItem.setRegistItemPlace("西看台");
+        registrationItem.setRegistItemMaterials("带上校园卡");
+        for (int i=0;i<10;i++)
+            registrationItems.add(registrationItem);
 
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
