@@ -71,7 +71,6 @@ public class AskHelpActivity extends AppCompatActivity {
         btn_submit_help = (QMUIRoundButton) findViewById(R.id.btn_submit_help);
         btn_cancel_help = (QMUIRoundButton) findViewById(R.id.btn_cancel_help);
         btn_cancel_help.setEnabled(false);
-        const_text = (TextView) findViewById(R.id.const_text);
     }
 
 

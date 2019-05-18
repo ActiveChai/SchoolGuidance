@@ -14,6 +14,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.schoolguidance.R;
+import com.example.schoolguidance.data.RegistrationItem;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,9 @@ public class IssueStep extends AppCompatActivity{
     private List<ItemBean> mDataPs;
     private ListView steplist;
     private Button mBuadd;
+    private Button mBuSubmit;
+    private TextView context;
+    private ArrayList<RegistrationItem> stepList=new ArrayList<>();
 
 
     @Override
@@ -38,7 +43,9 @@ public class IssueStep extends AppCompatActivity{
 //        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.admin_issue);
         steplist=findViewById(R.id.list_issue);
+
         mBuadd=(Button)findViewById(R.id.btn_add_step);
+        mBuSubmit=(Button)findViewById(R.id.btn_submit_step);
         mDataName = new ArrayList<ItemBean>();
         mDataTime = new ArrayList<ItemBean>();
         mDataPlace = new ArrayList<ItemBean>();
@@ -53,15 +60,39 @@ public class IssueStep extends AppCompatActivity{
                 mDataTime.add(new ItemBean());
                 mDataPlace.add(new ItemBean());
                 mDataPs.add(new ItemBean());
+                mAdapter.notifyDataSetChanged();
+                System.out.println(mDataName.get(0).getText());
+            }
+        });
+
+        mBuSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 for (int i=0;i<mDataName.size();i++)
                 {
-                    System.out.println(mDataName.get(i).getText()+"name"+i);
-                    System.out.println(mDataTime.get(i).getText()+"time"+i);
-                    System.out.println(mDataPlace.get(i).getText()+"place"+i);
-                    System.out.println(mDataPs.get(i).getText()+"ps"+i);
+                    if(mDataName.get(i).getText()==null||mDataTime.get(i).getText()==null||mDataPlace.get(i).getText()==null||mDataPs.get(i).getText()==null)
+                    {
+                        final QMUITipDialog tipDialog = new QMUITipDialog.Builder(IssueStep.this)
+                                .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
+                                .setTipWord("输入不可以为空")
+                                .create();
+                        tipDialog.show();
+                        mBuadd.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                tipDialog.dismiss();
+                            }
+                        }, 1000);
+                    }
+                    else {
+                        RegistrationItem registrationItem=new RegistrationItem();
+                        registrationItem.setRegistItemContent(mDataName.get(i).getText());
+                        registrationItem.setRegistItemStartTime(mDataTime.get(i).getText());
+                        registrationItem.setRegistItemPlace(mDataPlace.get(i).getText());
+                        registrationItem.setRegistItemMaterials(mDataPs.get(i).getText());
+                        stepList.add(registrationItem);
+                    }
                 }
-
-                mAdapter.notifyDataSetChanged();
             }
         });
     }
