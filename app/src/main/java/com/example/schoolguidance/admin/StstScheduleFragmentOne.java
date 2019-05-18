@@ -1,5 +1,6 @@
 package com.example.schoolguidance.admin;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.schoolguidance.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -50,13 +53,14 @@ public class StstScheduleFragmentOne extends Fragment {
         yValues.add(new BarEntry(0,0));
         for (int x = 1; x < 10; x++) {
             // 2.0 ----xValues.add(String.valueOf(i));
-            float y = (float) (Math.random() * 10);
+            float y = (float) (Math.random() * 1000);
             yValues.add(new BarEntry(x, y));
         }
 
         // y 轴数据集
-        BarDataSet barDataSet = new BarDataSet(yValues, "条形图");
-
+        BarDataSet barDataSet = new BarDataSet(yValues, "人数");
+        barDataSet.setColor(Color.rgb(33,150,243));
+        barDataSet.setValueTextSize(11f);
 
         // 2.0 ---- mBarData = new BarData(xValues, barDataSet);
         mBarData = new BarData(barDataSet);
@@ -71,12 +75,22 @@ public class StstScheduleFragmentOne extends Fragment {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setAxisMinimum(0f);
         xAxis.setGranularity(1f);
+        xAxis.setTextSize(12f);
         leftxAxis=mBarChart.getAxisLeft();
         rightxAris=mBarChart.getAxisRight();
         leftxAxis.setAxisMinimum(0f);
+        leftxAxis.setTextSize(12f);
         rightxAris.setDrawAxisLine(false);
         rightxAris.setEnabled(false);
         xAxis.setDrawGridLines(false);
+        Legend legend=mBarChart.getLegend();
+        legend.setTextSize(11f);
+        Description xDescription = new Description();
+        xDescription.setText("完成任务数");
+        xDescription.setTextSize(12f);
+        xDescription.setPosition(950,1480);
+        mBarChart.setDescription(xDescription);
+        mBarChart.setTouchEnabled(false);
     }
 }
 

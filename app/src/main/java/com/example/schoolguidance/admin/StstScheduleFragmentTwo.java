@@ -54,15 +54,17 @@ public class StstScheduleFragmentTwo extends Fragment {
 
     private List<PieEntry> getPieChartData() {
         List<String> dataList=new ArrayList<>();
+        List<Float> datal=new ArrayList<>();
         List<PieEntry> mPie = new ArrayList<>();
 
-        for (int i=0;i<5;i++ ) {
+        for (int i=0;i<7;i++ ) {
             dataList.add(String.valueOf(i*10));
+            datal.add((float) i*10);
         }
-        for (String data : dataList ) {
+        for (int i=0;i<dataList.size();i++) {
             // 参数1为 value，参数2为 data。
             // 如 PieEntry(0.15F, "90分以上");  表示90分以上的人占比15%。
-            PieEntry pieEntry = new PieEntry(0.15f, data);
+            PieEntry pieEntry = new PieEntry(datal.get(i), dataList.get(i));
             pieEntry.setX(1f);
             mPie.add(pieEntry);
         }
