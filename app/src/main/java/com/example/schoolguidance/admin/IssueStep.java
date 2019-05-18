@@ -22,80 +22,47 @@ import java.util.Map;
 
 import static com.example.schoolguidance.volun.VolunMainActivity.adapter;
 
-public class IssueStep extends AppCompatActivity implements View.OnClickListener{
-    private EditText step1num;
-    private Button stepNumSubmit;
-    private Button stepSubmit;
+public class IssueStep extends AppCompatActivity{
+    private ListViewAdapter mAdapter;
+    private List<ItemBean> mDataName;
+    private List<ItemBean> mDataTime;
+    private List<ItemBean> mDataPlace;
+    private List<ItemBean> mDataPs;
     private ListView steplist;
-    private int step_num;
-    static public List<Map<String, Object>> totalList = new ArrayList<Map<String, Object>>();
-    final ArrayList<String> Names = new ArrayList();
+    private Button mBuadd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.admin_issue);
-        step1num=findViewById(R.id.issue_num);
         steplist=findViewById(R.id.list_issue);
-        stepSubmit=(Button)findViewById(R.id.btn_submit_step);
-        stepNumSubmit=(Button)findViewById(R.id.btn_submit_stepnum);
-        stepNumSubmit.setOnClickListener(this);
-        stepSubmit.setOnClickListener(this);
+        mBuadd=(Button)findViewById(R.id.btn_add_step);
+        mDataName = new ArrayList<ItemBean>();
+        mDataTime = new ArrayList<ItemBean>();
+        mDataPlace = new ArrayList<ItemBean>();
+        mDataPs = new ArrayList<ItemBean>();
+        mAdapter = new ListViewAdapter(this, mDataName,mDataTime,mDataPlace,mDataPs);
+        steplist.setAdapter(mAdapter);
 
+        mBuadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDataName.add(new ItemBean());
+                mDataTime.add(new ItemBean());
+                mDataPlace.add(new ItemBean());
+                mDataPs.add(new ItemBean());
+                for (int i=0;i<mDataName.size();i++)
+                {
+                    System.out.println(mDataName.get(i).getText()+"name"+i);
+                    System.out.println(mDataTime.get(i).getText()+"time"+i);
+                    System.out.println(mDataPlace.get(i).getText()+"place"+i);
+                    System.out.println(mDataPs.get(i).getText()+"ps"+i);
+                }
+
+                mAdapter.notifyDataSetChanged();
+            }
+        });
     }
-
-    @Override
-    public void onClick(View arg0) {
-        switch (arg0.getId()) {
-            case R.id.btn_submit_stepnum:
-                submitNumAction();
-                break;
-            case R.id.btn_submit_step:
-                submitStepAction();
-                break;
-        }
-    }
-
-    public void submitNumAction()
-    {
-        totalList.clear();
-        Names.clear();
-        step_num= Integer.parseInt(step1num.getText().toString());
-        for (int i=0;i<step_num;i++)
-        {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("stepname", "");
-            map.put("steptime", "");
-            map.put("stepissue", "");
-            map.put("stepps", "");
-            totalList.add(map);
-        }
-        adapter = new SimpleAdapter(this, totalList, R.layout.admin_item_issue_step,
-                new String[] {"stepname","steptime","stepissue","stepps"},
-                new int[] { R.id.step_name, R.id.step_time ,R.id.step_place,R.id.step_ps});
-        steplist.setAdapter(adapter);
-        System.out.println(totalList.size()+"sizelslsls");
-
-        stepSubmit.setVisibility(View.VISIBLE);
-    }
-
-    public void submitStepAction()
-    {
-        for (int i=0;i<step_num;i++)
-        {
-            steplist.getItemAtPosition(i);//setSelection(i);//;getSelectedItem();
-            EditText name = (EditText)findViewById(R.id.step_name);
-            Names.add(name.getText().toString()+"s");
-            System.out.println(Names.size()+"sizelslsls"+Names);
-            final EditText time = (EditText)findViewById(R.id.step_time );
-//                Names.add((String) name.getText().toString());
-            final EditText space = (EditText)findViewById(R.id.step_place);
-//                Names.add((String) name.getText().toString());
-            final EditText ps = (EditText)findViewById(R.id.step_ps);
-//                Names.add((String) name.getText().toString());
-        }
-
-    }
-
 }
