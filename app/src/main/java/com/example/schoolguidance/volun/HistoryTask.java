@@ -23,7 +23,7 @@ public class HistoryTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.volun_history_task);
         initData();
-        MyAdapter adapter=new MyAdapter(HistoryTask.this,R.layout.volun_ervice_history_item,volunteerServices);
+        MyAdapter adapter=new MyAdapter(HistoryTask.this,R.layout.volun_service_history_item,volunteerServices);
         ListView listView=(ListView)findViewById(R.id.history_listview);
         listView.setAdapter(adapter);
     }
