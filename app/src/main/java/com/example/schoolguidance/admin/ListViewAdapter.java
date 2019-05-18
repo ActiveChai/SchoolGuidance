@@ -175,6 +175,7 @@ public class ListViewAdapter extends BaseAdapter {
         };
         holder.editPs.addTextChangedListener(watcherPs);
         holder.editPs.setTag(watcherPs);
+
         return convertView;
     }
 
