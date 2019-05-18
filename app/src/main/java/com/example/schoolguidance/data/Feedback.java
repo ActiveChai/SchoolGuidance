@@ -5,6 +5,7 @@ public class Feedback {
     private int Sno;
     private String feedcontent;
     private String feedreleasetime;
+    private String tags;
 
     public int getFeedno() {
         return feedno;
@@ -36,5 +37,13 @@ public class Feedback {
 
     public void setFeedreleasetime(String feedreleasetime) {
         this.feedreleasetime = feedreleasetime;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

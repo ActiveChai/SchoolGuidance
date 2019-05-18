@@ -24,6 +24,8 @@ public class HttpTool extends Thread {
     public static final int MODE_GET = 101;
     public static final int MODE_POST = 102;
 
+    public static final String ip = "hilosh.xyz:18080";
+
     private int message_what;
     private int current_mode;
 
@@ -35,12 +37,12 @@ public class HttpTool extends Thread {
 
     /**
      * @param MODL         选择POST或GET方式，HttpTool.MODE_GET / HttpTool.MODE_POST
-     * @param url          发送http请求的url，包括ip后的router
+     * @param url          发送http请求的url，ip后的router
      * @param message_what 使用Handler时，分辨消息的message.what
      */
     public HttpTool(int MODL, String url, int message_what, Handler handler) {
         current_mode = MODL;
-        str_url = url;
+        str_url = ip + url;
         this.message_what = message_what;
         this.handler = handler;
     }
