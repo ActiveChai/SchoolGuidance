@@ -86,8 +86,15 @@ public class StstScheduleFragmentTwo extends Fragment {
 
     private List<PieEntry> getPieChartData() {
 
+
+
         for (int i = 0; i < mSize; i++) {
-            float value = Float.valueOf(mCountList[i])/Float.valueOf(stuNum);
+            float value = Float.valueOf(mCountList[i]);
+//            for (int l = i + 1; l < mSize; l++) {
+//                value -=Float.valueOf(mCountList[l]);
+//            }
+            value = value/ Float.valueOf(stuNum);
+            value *= 100;
             datal.add(value);
             dataList.add(keys[i]);
         }

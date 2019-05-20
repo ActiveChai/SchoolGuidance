@@ -79,8 +79,6 @@ public class VolunteerFeedback extends AppCompatActivity {
 
                     insertFeedback.addData("feedbackcontent", text);
 
-                    insertFeedback.addData("tags","迎新");
-
                     insertFeedback.start();
                 }
                 break;
