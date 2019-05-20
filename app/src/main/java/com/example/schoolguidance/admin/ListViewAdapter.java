@@ -1,17 +1,23 @@
 package com.example.schoolguidance.admin;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.example.schoolguidance.R;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -96,16 +102,54 @@ public class ListViewAdapter extends BaseAdapter {
         if (holder.editTime.getTag() instanceof TextWatcher) {
             holder.editTime.removeTextChangedListener((TextWatcher) holder.editTime.getTag());
         }
+        final ViewHolder finalHolder = holder;
+        final ViewHolder finalHolder1 = holder;
+        holder.editTime.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
 
+                    Calendar calendar=Calendar.getInstance();
+                    DatePickerDialog datePickerDialog=new DatePickerDialog(ListViewAdapter.this.mContext,R.style.ThemeDialog, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+
+                            String pattern="00";
+                            java.text.DecimalFormat dfDate = new java.text.DecimalFormat(pattern);
+                            finalHolder.editTime.setText(i+"-"+dfDate.format(i1+1)+"-"+dfDate.format(i2));
+                        }
+                    },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+
+
+//                    Calendar calendar=Calendar.getInstance();
+                    TimePickerDialog timePickerDialog=new TimePickerDialog(ListViewAdapter.this.mContext, R.style.ThemeDialog,new TimePickerDialog.OnTimeSetListener() {
+                        @Override
+                        public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                            String pattern="00";
+                            java.text.DecimalFormat df = new java.text.DecimalFormat(pattern);
+                            finalHolder1.editTime.setText(finalHolder.editTime.getText()+" "+df.format(i)+":"+df.format(i1));
+                        }
+                    },calendar.get(Calendar.HOUR),calendar.get(Calendar.MINUTE),true);
+                    timePickerDialog.show();
+                    datePickerDialog.show();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+//        holder.editTime.setText(df.format(i)+":"+df.format(i1));
         holder.editTime.setText(itemObjTime.getText());
 
         TextWatcher watcherTime = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                System.out.println("clickb");
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
             @Override
@@ -120,6 +164,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         holder.editTime.addTextChangedListener(watcherTime);
         holder.editTime.setTag(watcherTime);
+
         //place
         if (holder.editPlace.getTag() instanceof TextWatcher) {
             holder.editPlace.removeTextChangedListener((TextWatcher) holder.editPlace.getTag());

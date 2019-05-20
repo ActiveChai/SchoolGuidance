@@ -4,12 +4,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.schoolguidance.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -17,6 +19,8 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.util.ArrayList;
 
@@ -39,11 +43,14 @@ public class StstScheduleFragmentOne extends Fragment {
         view = inflater.inflate(R.layout.admin_stst_sche_barchart, null);
         Bundle bundle = getArguments();
         mSize = Integer.valueOf(bundle.getString("stepNum"));
-        mCountList = new String[mSize];
-        keys = new String[mSize];
-        for(int i = 0;i < mSize;i++){
-            mCountList[i] = bundle.getString(String.valueOf(i));
-            keys[i] = bundle.getString("key"+String.valueOf(i));
+        mCountList = new String[mSize+1];
+        keys = new String[mSize+1];
+        mCountList[0]="0";
+        keys[0]="";
+        for(int i = 1;i < mSize+1;i++){
+            mCountList[i] = bundle.getString(String.valueOf(i-1));
+            keys[i] = bundle.getString("key"+String.valueOf(i-1));
+//            Log.d("aaaaaaaaaaaaaaaa",keys[i]);
         }
         initView();
         initData();
@@ -61,10 +68,10 @@ public class StstScheduleFragmentOne extends Fragment {
         // y 轴数据
         ArrayList<BarEntry> yValues = new ArrayList<>();
         // 2.0 ----x 轴数据
-        // ArrayList<String> xValues = new ArrayList<>();
+//         ArrayList<String> xValues = new ArrayList<>();
 
         yValues.add(new BarEntry(0,0));
-        for (int x = 1; x < mSize; x++) {
+        for (int x = 1; x < mSize+1; x++) {
             // 2.0 ----xValues.add(String.valueOf(i));
             int y = Integer.valueOf(mCountList[x]);
             yValues.add(new BarEntry(x, y));
@@ -75,6 +82,7 @@ public class StstScheduleFragmentOne extends Fragment {
         barDataSet.setColor(Color.rgb(33,150,243));
         barDataSet.setValueTextSize(11f);
 
+        barDataSet.setDrawValues(false);//不显示柱子上的数值
         // 2.0 ---- mBarData = new BarData(xValues, barDataSet);
         mBarData = new BarData(barDataSet);
     }
@@ -93,13 +101,29 @@ public class StstScheduleFragmentOne extends Fragment {
         rightxAris=mBarChart.getAxisRight();
         leftxAxis.setAxisMinimum(0f);
         leftxAxis.setTextSize(12f);
+        leftxAxis.setGranularity(1f);
         rightxAris.setDrawAxisLine(false);
         rightxAris.setEnabled(false);
         xAxis.setDrawGridLines(false);
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return  keys[((int) value)];
+            }
+        });
+
+        leftxAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return (int) value+"";
+            }
+        });
+
+
         Legend legend=mBarChart.getLegend();
         legend.setTextSize(11f);
         Description xDescription = new Description();
-        xDescription.setText("任务号");
+        xDescription.setText("任务名");
         xDescription.setTextSize(12f);
         xDescription.setPosition(950,1480);
         mBarChart.setDescription(xDescription);

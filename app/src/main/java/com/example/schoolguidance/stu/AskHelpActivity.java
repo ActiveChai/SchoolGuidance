@@ -106,7 +106,7 @@ public class AskHelpActivity extends AppCompatActivity {
 
         selectVolunteerService = new HttpTool(HttpTool.MODE_POST, "/freshman/selectVolunteerService", MESS_SELECTVOLUNTEERSERVICE, handler);
 
-        selectVolunteerService.addData("freshNo", String.valueOf("2"));
+        selectVolunteerService.addData("freshNo", String.valueOf("1"));
         selectVolunteerService.addData("tags","迎新");
 
         selectVolunteerService.start();
