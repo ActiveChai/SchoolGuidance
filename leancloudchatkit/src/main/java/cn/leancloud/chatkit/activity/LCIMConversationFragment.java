@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,6 +45,7 @@ import com.avos.avoscloud.im.v2.messages.AVIMRecalledMessage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import cn.leancloud.chatkit.R;
@@ -56,6 +59,7 @@ import cn.leancloud.chatkit.event.LCIMMessageResendEvent;
 import cn.leancloud.chatkit.event.LCIMMessageUpdateEvent;
 import cn.leancloud.chatkit.event.LCIMMessageUpdatedEvent;
 import cn.leancloud.chatkit.event.LCIMOfflineMessageCountChangeEvent;
+import cn.leancloud.chatkit.tool.HttpTool;
 import cn.leancloud.chatkit.utils.LCIMAudioHelper;
 import cn.leancloud.chatkit.utils.LCIMConstants;
 import cn.leancloud.chatkit.utils.LCIMLogUtils;
@@ -63,7 +67,7 @@ import cn.leancloud.chatkit.utils.LCIMNotificationUtils;
 import cn.leancloud.chatkit.utils.LCIMPathUtils;
 import cn.leancloud.chatkit.view.LCIMInputBottomBar;
 import de.greenrobot.event.EventBus;
-
+import android.app.AlertDialog.Builder;
 /**
  * Created by wli on 15/8/27.
  * 将聊天相关的封装到此 Fragment 里边，只需要通过 setConversation 传入 Conversation 即可
@@ -72,6 +76,10 @@ public class LCIMConversationFragment extends Fragment {
 
   private static final int REQUEST_IMAGE_CAPTURE = 1;
   private static final int REQUEST_IMAGE_PICK = 2;
+
+  private final static int MESS_COMPLETESERVICE = 501;
+
+  public static  int activityNo;
 
   protected AVIMConversation imConversation;
 
@@ -95,6 +103,23 @@ public class LCIMConversationFragment extends Fragment {
 
   // 记录拍照等的文件路径
   protected String localCameraPath;
+
+  final Handler handler = new Handler() {
+    @Override
+    public void handleMessage(Message msg) {
+      super.handleMessage(msg);
+      System.out.println(msg);
+
+      switch (msg.what) {
+        case MESS_COMPLETESERVICE:
+          String obj = (String)msg.obj;
+          Toast.makeText(getContext(), "完成任务", Toast.LENGTH_LONG).show();
+          break;
+        default:
+          break;
+      }
+    }
+  };
 
   @Nullable
   @Override
@@ -180,14 +205,34 @@ public class LCIMConversationFragment extends Fragment {
   @Override
   public boolean onOptionsItemSelected (MenuItem item) {
     if (item.getItemId() == R.id.menu_conv_setting) {
-      Intent intent = new Intent(getActivity(), LCIMConversationDetailActivity.class);
-      intent.putExtra(LCIMConstants.CONVERSATION_ID, imConversation.getConversationId());
-      getActivity().startActivity(intent);
-      return true;
+      Builder builder_done = createAlertDialog(android.R.drawable.checkbox_on_background, "确定当前志愿者服务完成了吗？");
+      builder_done.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          //修改志愿者活动状态为已完成和新生状态为可请求
+          Date date = new Date();
+          HttpTool completeService = new HttpTool(HttpTool.MODE_POST,"/volunteer/completeService",MESS_COMPLETESERVICE,handler);
+          completeService.addData("activityNo",String.valueOf(activityNo));
+          completeService.addData("endTime",date.toString());
+          completeService.start();
+        }
+      });
+      builder_done.show();
+//      Intent intent = new Intent(getActivity(), LCIMConversationDetailActivity.class);
+//      intent.putExtra(LCIMConstants.CONVERSATION_ID, imConversation.getConversationId());
+//      getActivity().startActivity(intent);
+//      return true;
     }
     return super.onOptionsItemSelected(item);
   }
 
+  public Builder createAlertDialog(int icDialogAlert, String string) {
+    Builder builder = new Builder(this.getContext());
+    builder.setIcon(icDialogAlert);
+    builder.setTitle(string);
+    builder.setNegativeButton("取消", null);
+    return builder;
+  }
   public void setConversation(final AVIMConversation conversation) {
     imConversation = conversation;
     refreshLayout.setEnabled(true);
@@ -444,7 +489,7 @@ public class LCIMConversationFragment extends Fragment {
       localCameraPath = LCIMPathUtils.getPicturePathByCurrentTime(getContext());
       Uri imageUri = Uri.fromFile(new File(localCameraPath));
       takePictureIntent.putExtra("return-data", false);
-      takePictureIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, imageUri);
+      takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
     } else {
       localCameraPath = Environment.getExternalStorageDirectory() + "/images/" + System.currentTimeMillis()+".jpg";
       File photoFile = new File(localCameraPath);
