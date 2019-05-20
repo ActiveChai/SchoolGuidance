@@ -87,6 +87,8 @@ public class PunchCardsActivity extends AppCompatActivity {
 
         getRegistrationItems.addData("stuNo", String.valueOf("1"));
 
+        getRegistrationItems.addData("tags","迎新");
+
         getRegistrationItems.start();
 
         adapter = new StuTaskAdapter(PunchCardsActivity.this, R.layout.stu_task_item, registrationItems);

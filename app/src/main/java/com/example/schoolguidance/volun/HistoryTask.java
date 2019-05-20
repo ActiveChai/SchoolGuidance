@@ -75,6 +75,8 @@ public class HistoryTask extends AppCompatActivity {
 
         selectVolunteerServiceByVno.addData("Vno", String.valueOf("1"));
 
+        selectVolunteerServiceByVno.addData("tags", "迎新");
+
         selectVolunteerServiceByVno.start();
 
         adapter = new MyAdapter(HistoryTask.this, R.layout.volun_service_history_item, volunteerServices);

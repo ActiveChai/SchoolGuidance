@@ -88,6 +88,7 @@ public class MessagesActivity extends AppCompatActivity {
 
         HttpTool selectVolunteerService = new HttpTool(HttpTool.MODE_POST, "/freshman/selectVolunteerService", MESS_SELECTVOLUNTEERSERVICE, handler);
         selectVolunteerService.addData("freshNo", "1");
+        selectVolunteerService.addData("tags","迎新");
         selectVolunteerService.start();
 
     }

@@ -162,6 +162,7 @@ public class VolunMainActivity extends AppCompatActivity implements NavigationVi
     void initData() {
 
         HttpTool selectAllVolunteerService = new HttpTool(HttpTool.MODE_POST, "/volunteer/selectAllVolunteerService", MESS_SELECTALLVOLUNTEERSERVICE, handler);
+        selectAllVolunteerService.addData("tags","迎新");
         selectAllVolunteerService.start();
 
     }

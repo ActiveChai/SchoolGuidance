@@ -107,6 +107,7 @@ public class AskHelpActivity extends AppCompatActivity {
         selectVolunteerService = new HttpTool(HttpTool.MODE_POST, "/freshman/selectVolunteerService", MESS_SELECTVOLUNTEERSERVICE, handler);
 
         selectVolunteerService.addData("freshNo", String.valueOf("2"));
+        selectVolunteerService.addData("tags","迎新");
 
         selectVolunteerService.start();
     }
@@ -165,6 +166,7 @@ public class AskHelpActivity extends AppCompatActivity {
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");//获取当前时间
                     Date date = new Date(System.currentTimeMillis());
                     insertVolunteerService.addData("startTime", simpleDateFormat.format(date));
+                    insertVolunteerService.addData("tags", "迎新");
 
                     insertVolunteerService.start();
 

@@ -80,7 +80,7 @@ public class FeedbackActivity extends AppCompatActivity {
                     insertFeedback = new HttpTool(HttpTool.MODE_POST, "/freshman/insertFeedback", MESS_INSERTFEEDBACK, handler);
 
                     insertFeedback.addData("feedbackcontent", text);
-
+                    insertFeedback .addData("tags","迎新");
 
                     insertFeedback.start();
                 }
