@@ -59,6 +59,7 @@ public class PunchCardsActivity extends AppCompatActivity {
                                 registrationItem.setRegistItemTime(jsonObj.optString("registrationtime"));
                                 registrationItem.setRegistItemPlace(jsonObj.optString("registrationplace"));
                                 registrationItem.setRegistItemps(jsonObj.optString("registrationps"));
+                                registrationItem.setRegistItemNo(jsonObject.optInt("registrationno"));
                                 registrationItems.add(registrationItem);
 
                             }
