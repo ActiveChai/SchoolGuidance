@@ -26,17 +26,30 @@ public class StstScheduleFragmentOne extends Fragment {
     private XAxis xAxis;
     private YAxis leftxAxis;
     private YAxis rightxAris;
+
+    private int mSize;
+    private String[] mCountList;
+    private String[] keys; //  流程名！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+
+
     View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         view = inflater.inflate(R.layout.admin_stst_sche_barchart, null);
+        view = inflater.inflate(R.layout.admin_stst_sche_barchart, null);
+        Bundle bundle = getArguments();
+        mSize = Integer.valueOf(bundle.getString("stepNum"));
+        mCountList = new String[mSize];
+        keys = new String[mSize];
+        for(int i = 0;i < mSize;i++){
+            mCountList[i] = bundle.getString(String.valueOf(i));
+            keys[i] = bundle.getString("key"+String.valueOf(i));
+        }
         initView();
         initData();
         initBarChart();
         return view;
     }
-
 
 
     private void initView() {
@@ -51,9 +64,9 @@ public class StstScheduleFragmentOne extends Fragment {
         // ArrayList<String> xValues = new ArrayList<>();
 
         yValues.add(new BarEntry(0,0));
-        for (int x = 1; x < 10; x++) {
+        for (int x = 1; x < mSize; x++) {
             // 2.0 ----xValues.add(String.valueOf(i));
-            float y = (float) (Math.random() * 1000);
+            int y = Integer.valueOf(mCountList[x]);
             yValues.add(new BarEntry(x, y));
         }
 

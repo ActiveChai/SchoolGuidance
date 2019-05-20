@@ -25,14 +25,13 @@ public class CustomUserProvider implements LCChatProfileProvider {
   private CustomUserProvider() {
   }
 
-  private static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
+  public static List<LCChatKitUser> partUsers = new ArrayList<LCChatKitUser>();
 
   // 此数据均为 fake，仅供参考
   static {
     partUsers.add(new LCChatKitUser("志愿者007", "志愿者007", "emoji_unselected.png"));
     partUsers.add(new LCChatKitUser("新生2019", "新生2019", "emoji_unselected.png"));
     partUsers.add(new LCChatKitUser("新生2018", "新生2018", "emoji_unselected.png"));
-
   }
 
   @Override

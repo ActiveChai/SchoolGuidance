@@ -34,16 +34,21 @@ import static de.greenrobot.event.EventBus.TAG;
 public class StstScheduleFragmentTwo extends Fragment {
     private View view;
     private PieChart mPieChart;
-    private HttpTool httpTool;
-    private static final int MESS_TOTAL_STU=500;
+
+    private static final int MESS_TOTAL_STU = 500;
     private static final int MESS_TOTAL_TASK = 501;
     private static final int MESS_TASK_LIST = 502;
-    private static final int MESS_NUM=503;
+    private static final int MESS_NUM = 503;
     private int total_stu;
     private int total_task;
-    List<String> dataList=new ArrayList<>();
-    List<Float> datal=new ArrayList<>();
+    List<String> dataList = new ArrayList<>();
+    List<Float> datal = new ArrayList<>();
     List<PieEntry> mPie = new ArrayList<>();
+
+    private int mSize;
+    private String[] mCountList;
+    private int stuNum = 0;
+    private String[] keys;
 
 
     @Nullable
@@ -51,6 +56,17 @@ public class StstScheduleFragmentTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.admin_stst_sche_piechart, null);
         mPieChart = view.findViewById(R.id.pie_chart);
+
+
+        Bundle bundle = getArguments();
+        mSize = Integer.valueOf(bundle.getString("stepNum"));
+        mCountList = new String[mSize];
+        keys = new String[mSize];
+        stuNum = Integer.valueOf(bundle.getString("stuNum"));
+        for (int i = 0; i < mSize; i++) {
+            mCountList[i] = bundle.getString(String.valueOf(i));
+            keys[i] = bundle.getString("key" + String.valueOf(i));
+        }
         showPieChart(mPieChart, getPieChartData());
         mPieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -61,19 +77,21 @@ public class StstScheduleFragmentTwo extends Fragment {
             }
 
             @Override
-            public void onNothingSelected() {}
-        } );
+            public void onNothingSelected() {
+            }
+        });
 
         return view;
     }
 
     private List<PieEntry> getPieChartData() {
 
-        for (int i=0;i<7;i++ ) {
-            dataList.add(String.valueOf(i*10));
-            datal.add((float) i*10);
+        for (int i = 0; i < mSize; i++) {
+            float value = Float.valueOf(mCountList[i])/Float.valueOf(stuNum);
+            datal.add(value);
+            dataList.add(keys[i]);
         }
-        for (int i=0;i<dataList.size();i++) {
+        for (int i = 0; i < dataList.size(); i++) {
             // 参数1为 value，参数2为 data。
             // 如 PieEntry(0.15F, "90分以上");  表示90分以上的人占比15%。
             PieEntry pieEntry = new PieEntry(datal.get(i), dataList.get(i));
@@ -82,8 +100,9 @@ public class StstScheduleFragmentTwo extends Fragment {
         }
         return mPie;
     }
+
     private void showPieChart(PieChart pieChart, List<PieEntry> pieList) {
-        PieDataSet dataSet = new PieDataSet(pieList,"Label");
+        PieDataSet dataSet = new PieDataSet(pieList, "Label");
 
         // 设置颜色list，让不同的块显示不同颜色，下面是我觉得不错的颜色集合，比较亮
         ArrayList<Integer> colors = new ArrayList<Integer>();

@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -157,15 +156,6 @@ public class VolunMainActivity extends AppCompatActivity
             View view = LayoutInflater.from(getContext()).inflate(resourceId, null);//实例化一个对象
             TextView service_content = (TextView) view.findViewById(R.id.service_name);//获取该布局内的图片视图
             TextView service_time = (TextView) view.findViewById(R.id.service_time);//获取该布局内的文本视图
-            Button service_recieve = (Button) view.findViewById(R.id.btn_receive);//接受任务
-            service_recieve.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //这里还需要修改任务状态和志愿者状态
-                    Intent intent=new Intent(VolunMainActivity.this,CurrentTask.class);
-                    startActivity(intent);
-                }
-            });
             service_content.setText(volunteerService.getServiceContent());//为图片视图设置图片资源
             service_time.setText(volunteerService.getStartTime());//为文本视图设置文本内容
             return view;
