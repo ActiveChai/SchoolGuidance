@@ -26,7 +26,7 @@ public class AskHelpActivity extends AppCompatActivity {
     QMUIRoundButton btn_submit_help;
     QMUIRoundButton btn_cancel_help;
     TextView const_text;
-    Boolean askIsWait=true;//后台获取，该请求状态为真代表：等待志愿者接
+    Boolean askIsWait=false;//后台获取，该请求状态为真代表：等待志愿者接
     Boolean askIsTaken=false;//后台获取，该请求状态为真代表：有志愿者接了
     String content="lalalal";//后台获取，刚才发布的请求的内容
 
@@ -92,6 +92,14 @@ public class AskHelpActivity extends AppCompatActivity {
                         }
                     }, 1000);
 
+                }
+                else
+                {
+                    const_text.setText("您有请求正在等待志愿者接受，请耐心等待！您也可以选择取消，重新发布新的请求！");
+                    content_ask_help.setHint(content);
+                    content_ask_help.setEnabled(false);
+                    btn_submit_help.setEnabled(false);
+                    btn_cancel_help.setEnabled(true);
                 }
                 break;
             case R.id.btn_cancel_help:
