@@ -21,16 +21,17 @@ import java.util.List;
 
 public class StuMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private List<RegistrationItem> registrationItems=new ArrayList<>();
+    private List<RegistrationItem> registrationItems = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initData();
-        StuTaskAdapter adapter=new StuTaskAdapter(StuMainActivity.this,R.layout.stu_task_item,registrationItems);
-        ListView listView=(ListView)findViewById(R.id.task_listview);
+//        initData();
+        StuTaskAdapter adapter = new StuTaskAdapter(StuMainActivity.this, R.layout.stu_task_item, registrationItems);
+        ListView listView = (ListView) findViewById(R.id.task_listview);
         listView.setAdapter(adapter);
 
 
@@ -44,16 +45,18 @@ public class StuMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    void initData(){
-        RegistrationItem registrationItem=new RegistrationItem();
-        registrationItem.setRegistItemContent("领教材");
-        registrationItem.setRegistItemTime("9:00");
-        registrationItem.setRegistItemPlace("西看台");
-        registrationItem.setRegistItemps("带上校园卡");
-        for (int i=0;i<10;i++)
-            registrationItems.add(registrationItem);
 
-    }
+//    void initData() {
+//        RegistrationItem registrationItem = new RegistrationItem();
+//        registrationItem.setRegistItemContent("领教材");
+//        registrationItem.setRegistItemTime("9:00");
+//        registrationItem.setRegistItemPlace("西看台");
+//        registrationItem.setRegistItemps("带上校园卡");
+//        for (int i = 0; i < 10; i++)
+//            registrationItems.add(registrationItem);
+//
+//    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

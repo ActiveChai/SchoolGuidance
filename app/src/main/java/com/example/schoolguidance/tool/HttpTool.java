@@ -24,7 +24,7 @@ public class HttpTool extends Thread {
     public static final int MODE_GET = 101;
     public static final int MODE_POST = 102;
 
-    public static final String ip = "hilosh.xyz:18080";
+    public static final String ip = "http://www.hilosh.xyz:18080";
 
     private int message_what;
     private int current_mode;
@@ -51,10 +51,10 @@ public class HttpTool extends Thread {
      * @param MODE 设置的新模式 HttpTool.MODE_GET / HttpTool.MODE_POST
      * @return 是否成功设置
      */
-    public boolean setMODE(int MODE){
-        if((MODE!=MODE_GET)||(MODE!=MODE_POST)){
+    public boolean setMODE(int MODE) {
+        if ((MODE != MODE_GET) || (MODE != MODE_POST)) {
             return false;
-        }else {
+        } else {
             current_mode = MODE;
             return true;
         }
@@ -171,8 +171,13 @@ public class HttpTool extends Thread {
 
                 String inputLine;
                 String resultData = "";
-                while (((inputLine = buffer.readLine()) != null))
-                    resultData += inputLine + "\n";
+                boolean flag = false;
+                while (((inputLine = buffer.readLine()) != null)) {
+                    if (flag)
+                        resultData += "\n";
+                    else flag = true;
+                    resultData += inputLine;
+                }
                 in.close();
                 Log.d("RESPONSE", resultData);
                 sendMessage(resultData);
