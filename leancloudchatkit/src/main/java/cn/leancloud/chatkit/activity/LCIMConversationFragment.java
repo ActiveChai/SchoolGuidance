@@ -26,6 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.EditText;
 
@@ -87,7 +88,7 @@ public class LCIMConversationFragment extends Fragment {
    * recyclerView 对应的 Adapter
    */
   protected LCIMChatAdapter itemAdapter;
-
+  private Button setting;
   protected RecyclerView recyclerView;
   protected LinearLayoutManager layoutManager;
 
@@ -132,7 +133,7 @@ public class LCIMConversationFragment extends Fragment {
     inputBottomBar = (LCIMInputBottomBar) view.findViewById(R.id.fragment_chat_inputbottombar);
     layoutManager = new LinearLayoutManager(getActivity());
     recyclerView.setLayoutManager(layoutManager);
-
+    setting=(Button)view.findViewById(R.id.menu_conv_setting);
     itemAdapter = getAdpter();
     itemAdapter.resetRecycledViewPoolSize(recyclerView);
     recyclerView.setAdapter(itemAdapter);
@@ -158,7 +159,7 @@ public class LCIMConversationFragment extends Fragment {
                 if (null != list && list.size() > 0) {
                   itemAdapter.addMessageList(list);
                   itemAdapter.setDeliveredAndReadMark(imConversation.getLastDeliveredAt(),
-                    imConversation.getLastReadAt());
+                          imConversation.getLastReadAt());
                   itemAdapter.notifyDataSetChanged();
                   layoutManager.scrollToPositionWithOffset(list.size() - 1, 0);
                 }
@@ -215,6 +216,7 @@ public class LCIMConversationFragment extends Fragment {
           completeService.addData("activityNo",String.valueOf(activityNo));
           completeService.addData("endTime",date.toString());
           completeService.start();
+          setting.setEnabled(false);
         }
       });
       builder_done.show();
@@ -271,7 +273,7 @@ public class LCIMConversationFragment extends Fragment {
           itemAdapter.setMessageList(messageList);
           recyclerView.setAdapter(itemAdapter);
           itemAdapter.setDeliveredAndReadMark(imConversation.getLastDeliveredAt(),
-            imConversation.getLastReadAt());
+                  imConversation.getLastReadAt());
           itemAdapter.notifyDataSetChanged();
           scrollToBottom();
           clearUnreadConut();
@@ -298,7 +300,7 @@ public class LCIMConversationFragment extends Fragment {
    */
   public void onEvent(LCIMIMTypeMessageEvent messageEvent) {
     if (null != imConversation && null != messageEvent &&
-      imConversation.getConversationId().equals(messageEvent.conversation.getConversationId())) {
+            imConversation.getConversationId().equals(messageEvent.conversation.getConversationId())) {
       System.out.println("currentConv unreadCount=" + imConversation.getUnreadMessagesCount());
       if (imConversation.getUnreadMessagesCount() > 0) {
         paddingNewMessage(imConversation);
@@ -315,9 +317,9 @@ public class LCIMConversationFragment extends Fragment {
    */
   public void onEvent(LCIMMessageResendEvent resendEvent) {
     if (null != imConversation && null != resendEvent &&
-      null != resendEvent.message && imConversation.getConversationId().equals(resendEvent.message.getConversationId())) {
+            null != resendEvent.message && imConversation.getConversationId().equals(resendEvent.message.getConversationId())) {
       if (AVIMMessage.AVIMMessageStatus.AVIMMessageStatusFailed == resendEvent.message.getMessageStatus()
-        && imConversation.getConversationId().equals(resendEvent.message.getConversationId())) {
+              && imConversation.getConversationId().equals(resendEvent.message.getConversationId())) {
         sendMessage(resendEvent.message, false);
       }
     }
@@ -350,8 +352,8 @@ public class LCIMConversationFragment extends Fragment {
    */
   public void onEvent(LCIMInputBottomBarRecordEvent recordEvent) {
     if (null != imConversation && null != recordEvent &&
-      !TextUtils.isEmpty(recordEvent.audioPath) &&
-      imConversation.getConversationId().equals(recordEvent.tag)) {
+            !TextUtils.isEmpty(recordEvent.audioPath) &&
+            imConversation.getConversationId().equals(recordEvent.tag)) {
       if (recordEvent.audioDuration > 0)
         sendAudio(recordEvent.audioPath);
     }
@@ -363,16 +365,16 @@ public class LCIMConversationFragment extends Fragment {
    */
   public void onEvent(LCIMConversationReadStatusEvent readEvent) {
     if (null != imConversation && null != readEvent &&
-      imConversation.getConversationId().equals(readEvent.conversationId)) {
+            imConversation.getConversationId().equals(readEvent.conversationId)) {
       itemAdapter.setDeliveredAndReadMark(imConversation.getLastDeliveredAt(),
-        imConversation.getLastReadAt());
+              imConversation.getLastReadAt());
       itemAdapter.notifyDataSetChanged();
     }
   }
 
   public void onEvent(final LCIMMessageUpdateEvent event) {
     if (null != imConversation && null != event &&
-      null != event.message && imConversation.getConversationId().equals(event.message.getConversationId())) {
+            null != event.message && imConversation.getConversationId().equals(event.message.getConversationId())) {
       AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
       builder.setTitle("操作").setItems(new String[]{"撤回", "修改消息内容"}, new DialogInterface.OnClickListener() {
         @Override
@@ -390,7 +392,7 @@ public class LCIMConversationFragment extends Fragment {
 
   public void onEvent(final LCIMMessageUpdatedEvent event) {
     if (null != imConversation && null != event &&
-      null != event.message && imConversation.getConversationId().equals(event.message.getConversationId())) {
+            null != event.message && imConversation.getConversationId().equals(event.message.getConversationId())) {
       itemAdapter.updateMessage(event.message);
     }
   }
@@ -467,15 +469,15 @@ public class LCIMConversationFragment extends Fragment {
     AVIMTextMessage textMessage = new AVIMTextMessage();
     textMessage.setText(newContent);
     imConversation.updateMessage(message, textMessage, new AVIMMessageUpdatedCallback() {
-        @Override
-        public void done(AVIMMessage message, AVException e) {
-          if (null == e) {
-            itemAdapter.updateMessage(message);
-          } else {
-            Toast.makeText(getActivity(), "更新失败", Toast.LENGTH_SHORT).show();
-          }
+      @Override
+      public void done(AVIMMessage message, AVException e) {
+        if (null == e) {
+          itemAdapter.updateMessage(message);
+        } else {
+          Toast.makeText(getActivity(), "更新失败", Toast.LENGTH_SHORT).show();
         }
-      });
+      }
+    });
   }
 
   /**
@@ -495,9 +497,9 @@ public class LCIMConversationFragment extends Fragment {
       File photoFile = new File(localCameraPath);
 
       Uri photoURI = FileProvider.getUriForFile(this.getContext(),
-          this.getContext().getPackageName()+ ".provider", photoFile);
+              this.getContext().getPackageName()+ ".provider", photoFile);
       takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-          photoURI);
+              photoURI);
     }
     if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
       startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);

@@ -119,7 +119,7 @@ public class PunchCardsActivity extends AppCompatActivity {
             regist_time.setText(registrationItem.getRegistItemTime());//为文本视图设置文本内容
             regist_place.setText(registrationItem.getRegistItemPlace());
             regist_ps.setText(registrationItem.getRegistItemps());
-            Button task_complete = (Button) view.findViewById(R.id.task_complete);
+            final Button task_complete = (Button) view.findViewById(R.id.task_complete);
             task_complete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -129,6 +129,7 @@ public class PunchCardsActivity extends AppCompatActivity {
                     completeMission.addData("registrationno", String.valueOf(registrationItem1.getRegistItemNo()));
                     completeMission.addData("stuNo", "1");
                     completeMission.start();
+                    task_complete.setEnabled(false);
                 }
             });
             return view;

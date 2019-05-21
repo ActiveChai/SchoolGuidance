@@ -48,6 +48,7 @@ public class HistoryTask extends AppCompatActivity {
                                 volunteerService.setServiceType(jsonObject.optString("serviceType"));
                                 volunteerService.setStartTime(jsonObject.optString("startTime"));
                                 volunteerService.setEndTime(jsonObject.optString("endTime"));
+                                volunteerService.setServiceContent(jsonObject.optString("serviceContent"));
                                 volunteerServices.add(volunteerService);
                             }
                         }
@@ -102,7 +103,7 @@ class MyAdapter extends ArrayAdapter {
         TextView taskBeginTime = (TextView) view.findViewById(R.id.task_begin_time);
         TextView taskEndTime = (TextView) view.findViewById(R.id.task_end_time);
         taskno.setText(String.valueOf(volunteerService.getActivityNo()));//为图片视图设置图片资源
-        taskname.setText(volunteerService.getServiceType());//为文本视图设置文本内容
+        taskname.setText(volunteerService.getServiceContent());//为文本视图设置文本内容
         taskBeginTime.setText(volunteerService.getStartTime());
         taskEndTime.setText(volunteerService.getEndTime());
         return view;
