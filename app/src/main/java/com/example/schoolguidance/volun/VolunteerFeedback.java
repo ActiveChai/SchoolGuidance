@@ -57,7 +57,6 @@ public class VolunteerFeedback extends AppCompatActivity {
 
 
     public void onClick(View view) {
-        Intent intent = new Intent();
         String text = content_feed.getText().toString();
         switch (view.getId()) {
             case R.id.btn_submit_feed:
@@ -75,9 +74,11 @@ public class VolunteerFeedback extends AppCompatActivity {
                         }
                     }, 1000);
                 } else {
-                    insertFeedback = new HttpTool(HttpTool.MODE_POST, "/volunteer/insertFeedback", MESS_INSERTFEEDBACK, handler);
+                    insertFeedback = new HttpTool(HttpTool.MODE_POST, "/freshman/insertFeedback", MESS_INSERTFEEDBACK, handler);
 
                     insertFeedback.addData("feedbackcontent", text);
+
+                    insertFeedback.addData("tags","迎新");
 
                     insertFeedback.start();
                 }

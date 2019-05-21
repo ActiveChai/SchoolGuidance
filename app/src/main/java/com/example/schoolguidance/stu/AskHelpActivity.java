@@ -37,8 +37,8 @@ public class AskHelpActivity extends AppCompatActivity {
 
     private HttpTool selectVolunteerService;
     private HttpTool insertVolunteerService;
-    String serviceStatus;
-    String serviceContent;
+    String serviceStatus = "";
+    String serviceContent = "";
 
     final Handler handler = new Handler() {
         @Override
@@ -46,6 +46,7 @@ public class AskHelpActivity extends AppCompatActivity {
             super.handleMessage(msg);
             System.out.println(msg.obj);
 
+            boolean succ =true;
             switch (msg.what) {
                 case MESS_SELECTVOLUNTEERSERVICE:
                     try {
@@ -54,8 +55,9 @@ public class AskHelpActivity extends AppCompatActivity {
                         serviceContent = jsonObj.optString("serviceContent");
                         Sno=jsonObj.optInt("freshNo");
                         Vno=jsonObj.optInt("volunNo");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } catch (Exception e) {
+                        succ = false;
+                        break;
                     }
                     if (serviceStatus.equals("未接受")) {
                         askIsWait = true;
@@ -69,11 +71,14 @@ public class AskHelpActivity extends AppCompatActivity {
                 case MESS_INSERTVOLUNTEERSERVICE:
                     Toast toast = Toast.makeText(getApplicationContext(), "请求帮助成功", Toast.LENGTH_SHORT);
                     toast.show();//显示请求帮助是否成功信息
+                    askIsWait = true;
                     break;
                 default:
                     break;
             }
-
+            if(!succ){
+                return;
+            }
             if (askIsWait) {
                 const_text.setText("您有请求正在等待志愿者接受，请耐心等待！您也可以选择取消，重新发布新的请求！");
                 content_ask_help.setHint(content);
@@ -161,7 +166,7 @@ public class AskHelpActivity extends AppCompatActivity {
 
                     insertVolunteerService.addData("freshNo", String.valueOf("1"));
                     insertVolunteerService.addData("serviceContent", text);
-                    insertVolunteerService.addData("serviceStatus", serviceStatus);
+                    insertVolunteerService.addData("serviceStatus", "未接受");
 
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");//获取当前时间
                     Date date = new Date(System.currentTimeMillis());

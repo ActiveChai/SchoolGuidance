@@ -39,7 +39,7 @@ public class StstSchedule extends AppCompatActivity {
     //private YAxis yAxis;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private String[] title = {"条形图", "饼图"};
+    private String[] title = {"                                                                                  ", "饼图"};
 
     private int mStepNum = 0;
     private String[] mCountList;
@@ -128,17 +128,17 @@ public class StstSchedule extends AppCompatActivity {
                             bundle.putString("stepNum",String.valueOf(mStepNum));
                             fragment.setArguments(bundle);
                             break;
-                        case 1:
-                            fragment = new StstScheduleFragmentTwo();
-                            Bundle bundle1 = new Bundle();
-                            for (int i = 0; i < mStepNum; i++) {
-                                bundle1.putString(String.valueOf(i), mCountList[i]);//这里的values就是我们要传的值
-                                bundle1.putString("key"+String.valueOf(i),keys[i]);
-                            }
-                            bundle1.putString("stepNum",String.valueOf(mStepNum));
-                            bundle1.putString("stuNum",String.valueOf(stuNum));
-                            fragment.setArguments(bundle1);
-                            break;
+//                        case 1:
+//                            fragment = new StstScheduleFragmentTwo();
+//                            Bundle bundle1 = new Bundle();
+//                            for (int i = 0; i < mStepNum; i++) {
+//                                bundle1.putString(String.valueOf(i), mCountList[i]);//这里的values就是我们要传的值
+//                                bundle1.putString("key"+String.valueOf(i),keys[i]);
+//                            }
+//                            bundle1.putString("stepNum",String.valueOf(mStepNum));
+//                            bundle1.putString("stuNum",String.valueOf(stuNum));
+//                            fragment.setArguments(bundle1);
+//                            break;
 
                     }
                 }
@@ -147,14 +147,14 @@ public class StstSchedule extends AppCompatActivity {
 
             @Override
             public int getCount() {
-                return 2;
+                return 1;
             }
         });
 
         tabLayout.setupWithViewPager(viewPager);
         viewPager.setCurrentItem(0);
         tabLayout.getTabAt(0).setCustomView(getTabView(0));
-        tabLayout.getTabAt(1).setCustomView(getTabView(1));
+//        tabLayout.getTabAt(1).setCustomView(getTabView(1));
 //        tabLayout.getTabAt(2).setCustomView(getTabView(2));
 
         initTab();
@@ -171,10 +171,11 @@ public class StstSchedule extends AppCompatActivity {
                 if (textView.getText().toString().equals(title[0])) {
 //                    imageView.setImageResource(selectImg[0]);
                     viewPager.setCurrentItem(0);
-                } else if (textView.getText().toString().equals(title[1])) {
-//                    imageView.setImageResource(selectImg[1]);
-                    viewPager.setCurrentItem(1);
                 }
+//                else if (textView.getText().toString().equals(title[1])) {
+////                    imageView.setImageResource(selectImg[1]);
+//                    viewPager.setCurrentItem(1);
+//                }
             }
 
             @Override
@@ -186,10 +187,11 @@ public class StstSchedule extends AppCompatActivity {
                 if (textView.getText().toString().equals(title[0])) {
 //                    imageView.setImageResource(unSelectImg[0]);
                     viewPager.setCurrentItem(0);
-                } else if (textView.getText().toString().equals(title[1])) {
-//                    imageView.setImageResource(unSelectImg[1]);
-                    viewPager.setCurrentItem(1);
                 }
+//                else if (textView.getText().toString().equals(title[1])) {
+////                    imageView.setImageResource(unSelectImg[1]);
+//                    viewPager.setCurrentItem(1);
+//                }
             }
 
             @Override

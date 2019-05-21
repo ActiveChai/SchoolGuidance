@@ -36,11 +36,11 @@
     <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
         android:id="@+id/btn_submit_feed"
         android:layout_width="fill_parent"
+        android:onClick="onClick"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:clickable="true"
-        android:onClick="onClick"
         android:padding="10dp"
         android:text="提交"
         app:qmui_radius="10dp"
