@@ -98,7 +98,7 @@ public class IssueStep extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 for (int i = 0; i < mDataName.size(); i++) {
-                    if (mDataName.get(i).getText() == null || mDataTime.get(i).getText() == null || mDataPlace.get(i).getText() == null || mDataPs.get(i).getText() == null) {
+                    if (mDataName.get(i).getText() == null || mDataTime.get(i).getText() == null ||  mDataPlace.get(i).getText() == null || mDataPs.get(i).getText() == null) {
                         final QMUITipDialog tipDialog = new QMUITipDialog.Builder(IssueStep.this)
                                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
                                 .setTipWord("输入不可以为空")
@@ -110,7 +110,21 @@ public class IssueStep extends AppCompatActivity {
                                 tipDialog.dismiss();
                             }
                         }, 1000);
-                    } else {
+                    }else if(mDataTime.get(i).getText().length()<13)
+                    {
+                        final QMUITipDialog tipDialog = new QMUITipDialog.Builder(IssueStep.this)
+                                .setIconType(QMUITipDialog.Builder.ICON_TYPE_FAIL)
+                                .setTipWord("输入时间格式有误，请重新选择时间")
+                                .create();
+                        tipDialog.show();
+                        mBuadd.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                tipDialog.dismiss();
+                            }
+                        }, 1000);
+                    }
+                    else {
                         RegistrationItem registrationItem = new RegistrationItem();
                         registrationItem.setRegistItemContent(mDataName.get(i).getText());
                         registrationItem.setRegistItemTime(mDataTime.get(i).getText());
